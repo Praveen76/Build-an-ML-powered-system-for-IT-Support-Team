@@ -1,0 +1,115 @@
+<html>
+<head>
+        <title></title>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+            <link rel="stylesheet" href= "{{ url_for('static',filename='styles.css') }}">
+            <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+            <script type="text/javascript" src="{{ url_for('static', filename='dynamic.js') }}"></script>
+
+    
+</head>
+<body>
+        <script>
+                var configData = {{ configData|tojson }};
+                var tickets = {{tickets|tojson}};
+                console.log(configData);
+                console.log(JSON.stringify(tickets));
+            </script>
+       
+        <header>
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <div class="container-fluid">
+                            <div class="row" style="background-color:blue;">
+                                    <div class="col-md-2 col-sm-2 col-xs-2">
+                                        <a href="/user"><img class="logo" src="{{ url_for('static', filename='img/logo.png') }}" alt="KPMG" style="width:150px;height:100px;"></a>
+                                    </div>
+                                    <div class="col-md-7 col-sm-7 col-xs-7">
+                                        <p class="title" >KGS IT AI HelpDesk</p>
+                                    </div>
+                                    <div class="col-md-1 col-sm-1 col-xs-1">
+                                            
+                                        </div>
+                                        <div class="col-md-2 col-sm-2 col-xs-2">
+                                                <p class="title" >Admin Portal</p>
+                                            </div>
+                                    </div>
+                        <div class="row" style="padding: 20px;">
+                                <form action="" method="post">
+                                    <div class="row">
+                                        <div class="col-md-4 col-sm-4 col-xs-4">
+                                        <div class="form-group">
+                                          <label for="Assigned_Engineers">Overall Engineers</label>
+                                          <input type="text" class="form-control" value="{{configData.OVERALL_NO_OF_ASSIGNED_ENGINEERS}}" id="assignedEngineers" name="assignedEngineers" aria-describedby="assignedEngineers" placeholder="Assigned Engineers">
+                                        </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-4">
+                                        <div class="form-group">
+                                          <label for="RESOLUTION_ELAPSED_TIME">RESOLUTION ELAPSED TIME</label>
+                                          <input type="text" class="form-control" value="{{configData.RESOLUTION_ELAPSED_TIME}}" id="resolution_elapsed_time" name="resolution_elapsed_time">
+                                        </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                            <div class="col-md-4 col-sm-4 col-xs-4">
+                                            <div class="form-group">
+                                              <label for="RESOLUTION_SLA_TIME">RESOLUTION SLA TIME BY CATEGORY</label>
+                                              <select class="form-control" name="selectSlaTime" id="selectSlaTime">
+                                                    {% for md in configData.RESOLUTION_SLA_TIME %}
+                                                    <option value="{{md.id}}">{{md.id}}</option>
+                                                    {% endfor %}
+                                                  </select>
+                                              <input type="text" class="form-control" id="resolution_sla_time" name="resolution_sla_time" aria-describedby="assignedEngineers" placeholder="RESOLUTION SLA TIME">
+                                            </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-4 col-xs-4">
+                                            <div class="form-group">
+                                              <label for="TOTAL_NO_OF_ENGINEERS">TOTAL NO OF OCCUPIED ENGINEERS</label>
+                                              <input type="text" class="form-control" value="{{configData.TOTAL_NO_OF_ASSIGNED_ENGINEERS}}" id="total_no_of_engineers" name="total_no_of_engineers">
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                      </form>
+                            <div class="row" style="padding: 20px">
+                                    <table class="table table-striped table-sm text-center">
+                                            <thead style="background-color:rgba(22, 22, 180, 0.774);color:white;border:2px">
+                                              <tr>
+                                                  <th>TICKET No</th>
+                                                  <th>CATEGORY</th>
+                                                  <th>LOCATIONS</th>
+                                                  <th>DEPARTMENT</th>
+                                                  <th>CRITICALITY</th>
+                                                  <th>TOTAL NO OF ASSIGNED ENGINEERS</th>
+                                                  <th>RESOLUTION SLA TIME</th>
+                                                  <th>RESOLUTION ELAPSED TIME</th>
+                                                  <th>WILL RESOLUTION BE MET</th>
+                                                  <th>Suggestion TO MEET Deadline</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for s in tickets %}
+                                              <tr>
+                                                  <td>{{s.TICKET_No}}</td>
+                                                  <td>{{s.CATEGORY}}</td>
+                                                  <td>{{s.LOCATIONS}}</td>
+                                                  <td>{{s.DEPARTMENT}}</td>
+                                                  <td>{{s.CRITICALITY}}</td>
+                                                  <td>{{s.TOTAL_NO_OF_ASSIGNED_ENGINEERS}}</td>
+                                                  <td>{{s.RESOLUTION_SLA_TIME}}</td>
+                                                  <td>{{s.RESOLUTION_ELAPSED_TIME}}</td>
+                                                  <td>{{s.RESOLUTION_SLA}}</td>
+                                                  <td>{{s.SUGGESTED_SLA}}</td>
+
+                                              </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                          </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </nav>
+            </header>
+    </body>
+</html>

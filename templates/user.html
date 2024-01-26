@@ -1,0 +1,101 @@
+<html>
+<head>
+        <title></title>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+            <link rel="stylesheet" href= "{{ url_for('static',filename='styles.css') }}">
+            <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+            <script type="text/javascript" src="{{ url_for('static', filename='dynamic.js') }}"></script>
+
+    
+</head>
+<body>
+        <header>
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <div class="container-fluid">
+                        <div class="row" style="background-color:blue;">
+                        <div class="col-md-2 col-sm-2 col-xs-2">
+                            <a href="/user"><img class="logo" src="{{ url_for('static', filename='img/logo.png') }}" alt="KPMG" style="width:150px;height:100px;"></a>
+                        </div>
+                        <div class="col-md-7 col-sm-7 col-xs-7">
+                            <p class="title" >KGS IT AI HelpDesk</p>
+                        </div>
+                        <div class="col-md-1 col-sm-1 col-xs-1">
+                                
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-2">
+                                    <p class="title" >User Portal</p>
+                                </div>
+                        </div>
+                        <div class="row" style="padding: 20px;">
+                                <form method="post" action="">
+                                    <div class="row">
+                                            <div class="col-md-4 col-sm-4 col-xs-4">
+                                            <div class="form-group">
+                                            <label for="logTicket">Enter Your Issue</label>
+                                            <input type="text" class="form-control" name="logTicket" id="logTicket" aria-describedby="Describe your issue (eg. monitor not working)" placeholder="Describe your issue (eg. monitor not working)">
+                                            <small id="issueHelp" class="form-text text-muted">Please enter the Issue</small>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                            <div class="col-md-4 col-sm-4 col-xs-4">
+                                        <div class="form-group">
+                                                <label for="exampleFormControlSelect1">Select Location</label>
+                                                <select class="form-control" name="selectLocation" id="selectLocation">
+                                                    <option value="BLR">BLR</option>
+                                                    <option value="GGN">GGN</option>
+                                                    <option value="KOC">KOC</option>
+                                                    <option value="PNQ">PNQ</option>
+                                                    <option value="HYD">HYD</option>
+                                                </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-4 col-xs-4">
+                                                    <div class="form-group">
+                                                            <label for="exampleFormControlSelect2">Your Department</label>
+                                                            <select class="form-control" name="selectDepartment" id="selectDepartment">
+                                                                    <option value="Audit-Business"> Audit-Business                      </option> 
+                                                                    <option value="Audit-Management"> Audit-Management                    </option>
+                                                                    <option value="CapabilityHubs-RPOBusiness"> CapabilityHubs-RPOBusiness          </option> 
+                                                                    <option value="CF-HR"> CF-HR                               </option>   
+                                                                    <option value="K-CRC-RBSPPI-Permanent"> K-CRC-RBSPPI-Permanent              </option>  
+                                                                    <option value="K-CRC-RBSPPI-Retainers"> K-CRC-RBSPPI-Retainers              </option>  
+                                                                    <option value="RC-RA-InternalAudit&EnterpriseRisk"> RC-RA-InternalAudit&EnterpriseRisk  </option> 
+                                                                    <option value="Administration"> Administration                      </option>
+                                                                    <option value="CapabilityHubs-KM-Knowledge"> CapabilityHubs-KM-Knowledge         </option>    
+                                                                    <option value="CapabilityHubs-CorporateMGT"> CapabilityHubs-CorporateMGT         </option>    
+                                                                    <option value="CapabilityHubs-Research-LegalSupport"> CapabilityHubs-Research-LegalSupport</option>
+                                                            </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2 col-sm-2 col-xs-2">
+                                                                <div class="form-group">
+                                                                        <label for="exampleFormControlSelect3">Criticality</label>
+                                                                        <select class="form-control" name="criticality" id="selectLocation">
+                                                                            <option value="Minor">Minor</option>
+                                                                            <option value="Moderate">Moderate</option>
+                                                                        </select>
+                                                                        </div>
+                                                                    </div>
+                                            </div>
+                                        
+                                        <button type="submit" name="submit_ticket" class="btn btn-primary">Submit</button>
+                                        <div id="flashMessage">
+                                                {% with messages = get_flashed_messages() %}
+                                                {% if messages %}
+                                                  <ul >
+                                                  {% for message in messages %}
+                                                    <li>{{ message }}</li>
+                                                  {% endfor %}
+                                                  </ul>
+                                                {% endif %}
+                                              {% endwith %}
+                                        </div>
+                                        </form>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+    </body>
+</html>
